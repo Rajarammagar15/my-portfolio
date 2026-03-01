@@ -198,3 +198,24 @@
     left: 10px;
   }
 }
+
+
+.btn-resume {
+  padding: 0.85rem 2.2rem;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201,168,76,0.3);
+  text-decoration: none;
+  transition: all 0.25s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  display: inline-block;
+}
+.btn-resume:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+  transform: translateY(-2px);
+}

@@ -19,6 +19,9 @@ export default function Hero() {
         <div className="hero-cta">
           <a href="#experience" className="btn-primary">View Experience</a>
           <a href="#contact" className="btn-secondary">Get In Touch</a>
+          <a href="/resume.pdf" download="Rajaram_Magar_Resume.pdf" className="btn-resume">
+            ↓ Download Resume
+          </a>
         </div>
         <div className="cert-badges">
           {DATA.certifications.map((c) => (
