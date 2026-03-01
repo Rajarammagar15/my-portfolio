@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  padding: 100px 10% 4rem;   /* 100px top clears the fixed navbar */
+  padding: 100px 10% 4rem;
   position: relative;
   overflow: hidden;
 }
@@ -137,34 +137,64 @@
   width: 300px;
   height: 360px;
   object-fit: cover;
-  object-position: top center; /* crops to face + upper body */
+  object-position: top center;
   display: block;
   border: 1px solid var(--border);
   filter: grayscale(10%);
   transition: filter 0.3s;
 }
-
 .hero-photo:hover { filter: grayscale(0%); }
 
-/* Decorative accent border offset behind photo */
 .hero-photo-wrapper::before {
   content: '';
   position: absolute;
-  top: 14px;
-  left: 14px;
-  width: 100%;
-  height: 100%;
+  top: 14px; left: 14px;
+  width: 100%; height: 100%;
   border: 1px solid var(--accent);
   z-index: -1;
 }
 
-/* Mobile */
+/* ── Mobile: stack vertically, show photo on top ── */
 @media (max-width: 900px) {
   #about {
-    flex-direction: column;
+    flex-direction: column-reverse;  /* photo on top, text below */
     justify-content: center;
+    align-items: center;
     padding: 100px 6% 4rem;
-    gap: 3rem;
+    gap: 2.5rem;
+    text-align: center;
   }
-  .hero-photo-wrapper { display: none; }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-greeting {
+    justify-content: center;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .cert-badges {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  /* Smaller photo on mobile */
+  .hero-photo {
+    width: 200px;
+    height: 240px;
+  }
+
+  /* Adjust decorative border offset for smaller photo */
+  .hero-photo-wrapper::before {
+    top: 10px;
+    left: 10px;
+  }
 }

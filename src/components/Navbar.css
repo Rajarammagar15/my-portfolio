@@ -11,7 +11,6 @@ nav {
   border-bottom: 1px solid var(--border);
   transition: all 0.3s;
 }
-
 nav.scrolled { padding: 0.9rem 5%; }
 
 .nav-logo {
@@ -19,9 +18,11 @@ nav.scrolled { padding: 0.9rem 5%; }
   font-size: 1rem;
   color: var(--accent);
   letter-spacing: 0.05em;
+  z-index: 101;
 }
 .nav-logo span { color: var(--gold); }
 
+/* ── Desktop links ── */
 .nav-links {
   display: flex;
   gap: 2.5rem;
@@ -38,7 +39,6 @@ nav.scrolled { padding: 0.9rem 5%; }
   transition: color 0.2s;
   position: relative;
 }
-
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -47,10 +47,88 @@ nav.scrolled { padding: 0.9rem 5%; }
   background: var(--accent);
   transition: width 0.3s;
 }
-
 .nav-links a:hover { color: var(--text-primary); }
 .nav-links a:hover::after { width: 100%; }
 
+/* ── Hamburger button ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-secondary);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animate to X when open */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--accent);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--accent);
+}
+
+/* ── Mobile dropdown menu ── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  background: rgba(11, 17, 32, 0.98);
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding-top: 80px;
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.35s ease;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+}
+
+.mobile-link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 1.1rem 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, background 0.2s;
+}
+.mobile-link:hover {
+  color: var(--accent);
+  background: rgba(79, 156, 249, 0.04);
+}
+
+/* ── Responsive breakpoints ── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: flex; }
 }
