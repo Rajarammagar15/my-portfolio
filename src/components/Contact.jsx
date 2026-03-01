@@ -12,20 +12,20 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useState } from "react";
-// import emailjs from "@emailjs/browser"; // ← uncomment after: npm install @emailjs/browser
+import emailjs from "@emailjs/browser";   
 
 import DATA from "../data/resume";
 import { useFadeIn } from "../hooks/useFadeIn";
 import "./Contact.css";
 
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";   // ← replace
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";  // ← replace
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";   // ← replace
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;  
 
 export default function Contact() {
   useFadeIn();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) =>
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -37,25 +37,26 @@ export default function Contact() {
     // ── OPTION A: EmailJS (recommended) ──────────────────────
     // Uncomment the block below once you've installed emailjs and filled in the keys above.
     //
-    // emailjs
-    //   .send(
-    //     EMAILJS_SERVICE_ID,
-    //     EMAILJS_TEMPLATE_ID,
-    //     {
-    //       from_name:  formData.name,
-    //       from_email: formData.email,
-    //       message:    formData.message,
-    //     },
-    //     EMAILJS_PUBLIC_KEY
-    //   )
-    //   .then(() => {
-    //     setStatus("sent");
-    //     setFormData({ name: "", email: "", message: "" });
-    //   })
-    //   .catch(() => setStatus("error"));
+    emailjs
+      .send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  formData.name,
+          from_email: formData.email,
+          message:    formData.message,
+          to_email:   "rajarammagar101@gmail.com",
+        },
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setStatus("sent");
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch(() => setStatus("error"));
     //
     // ── OPTION B: Dummy success (current behaviour — remove once EmailJS is set up) ──
-    setTimeout(() => setStatus("sent"), 800);
+    // setTimeout(() => setStatus("sent"), 800);
   };
 
   return (
@@ -81,10 +82,10 @@ export default function Contact() {
                 <a href={`mailto:${DATA.contact.email}`}>{DATA.contact.email}</a>
               </span>
             </div>
-            <div className="contact-row">
+            {/* <div className="contact-row">
               <span className="contact-row-label">Phone</span>
               <span className="contact-row-val">{DATA.contact.phone}</span>
-            </div>
+            </div> */}
             <div className="contact-row">
               <span className="contact-row-label">Based in</span>
               <span className="contact-row-val">{DATA.contact.location}</span>

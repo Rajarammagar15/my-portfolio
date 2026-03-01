@@ -1,6 +1,6 @@
 const DATA = {
   name: "Rajaram Magar",
-  role: "Software Engineer — Backend & Microservices",
+  role: "Backend Engineer building high-scale financial systems & AI-driven solutions",
   bio: "Software Engineer with ~3 years of experience building high-performance, secure, and scalable Java-based backend systems in the banking and financial domain. Specialized in Spring Boot microservices, event-driven architectures, real-time transaction processing, and payments-grade API design.",
   stats: [
     { num: "3", label: "Years Experience" },
@@ -30,7 +30,7 @@ const DATA = {
     {
       icon: "🔗",
       title: "Architecture & Messaging",
-      tags: ["Microservices", "Event-Driven", "RabbitMQ", "Idempotency", "Concurrency", "System Design"],
+      tags: ["System Design", "Concurrency", "Idempotency", "Microservices", "Event-Driven", "RabbitMQ"],
     },
     {
       icon: "🧪",
@@ -40,26 +40,38 @@ const DATA = {
   ],
   projects: [
     {
+      title: "AI Stock Movement Prediction Agent",
+      desc: "Building an AI-powered stock movement prediction system that aggregates financial news, YouTube expert sentiment, Twitter/Reddit discussions, and technical indicators (RSI, SMA) to forecast stock price movements across multiple timeframes (T+1, T+5, T+30 days). \n The system uses LLM-based sentiment extraction pipelines and trains XGBoost models on engineered features to avoid look-ahead bias and improve predictive accuracy. Designed as a modular agent-based architecture using LangChain for intelligent decision orchestration.",
+      stack: ["Python", "LangChain", "XGBoost", "Pandas", "LLM APIs", "Feature Engineering", "ML Pipeline"],
+      github: null,
+      frontendGithub: null,
+      demo: null,
+      academic: false,
+    },
+    {
       title: "Personal Finance Manager",
-      desc: "Full-stack budget and expense tracking platform built with Java Spring Boot and ReactJS. Features secure JWT-based user authentication, editable user profiles, a visual income/expenses/savings dashboard, category-wise budget tracking with real-time updates, and transaction management with monthly filters.",
+      desc: "Built a secure full-stack financial management platform with JWT authentication, real-time dashboard analytics, and category-wise budgeting system built with Java Spring Boot and ReactJS. Features secure JWT-based user authentication, editable user profiles, a visual income/expenses/savings dashboard, category-wise budget tracking with real-time updates, and transaction management with monthly filters.",
       stack: ["Java", "Spring Boot", "ReactJS", "PostgreSQL", "JWT"],
       github: "https://github.com/Rajarammagar15/personal-finance-manager-spring-boot.git",
       frontendGithub: "https://github.com/Rajarammagar15/personal-finance-manager-react.git",
       demo: null,
+      academic: false,
     },
-    {
-      title: "Continuous Face Authentication (Webcam)",
-      desc: "Real-time face authentication system leveraging a fine-tuned PyTorch model (nn4.small2.v1.t7) for continuous user verification via webcam. Achieved near-perfect accuracy under variable lighting and facial expression conditions. Built during B.Tech at Govt. College of Engineering, Chandrapur.",
-      stack: ["Python", "PyTorch", "Deep Learning", "OpenCV"],
-      github: null,
-      demo: null,
-    },
+    // {
+    //   title: "Continuous Face Authentication (Webcam)",
+    //   desc: "Real-time face authentication system leveraging a fine-tuned PyTorch model (nn4.small2.v1.t7) for continuous user verification via webcam. Achieved near-perfect accuracy under variable lighting and facial expression conditions. Built during B.Tech at Govt. College of Engineering, Chandrapur.",
+    //   stack: ["Python", "PyTorch", "Deep Learning", "OpenCV"],
+    //   github: null,
+    //   demo: null,
+    //   academic: true,
+    // },
     {
       title: "Face Recognition Model",
       desc: "Feed-forward neural network for high-accuracy facial recognition and authentication. Trained and tested across multiple benchmark datasets, achieving ~100% test accuracy with near-perfect precision, recall, and F1-score. A robust solution for security and biometric identification systems.",
       stack: ["Python", "Deep Learning", "Neural Networks", "PyTorch"],
       github: null,
       demo: null,
+      academic: true,
     },
   ],
   experience: [
@@ -72,6 +84,7 @@ const DATA = {
         {
           label: "Banking & Financial Services Domain",
           bullets: [
+            "High-volume financial transaction systems (wallets, prepaid cards, banking integrations)",
             "Designed and developed 10+ Spring Boot microservices handling high-volume financial transactions including digital wallets, prepaid virtual cards (top-up/redemption), and core banking integrations.",
             "Built and optimized 25+ REST APIs, improving average response time by 20–30% through query tuning and structured exception handling.",
             "Implemented idempotent transaction mechanisms, reducing duplicate financial operations by 40% during retry scenarios.",
@@ -110,10 +123,10 @@ const DATA = {
   },
   contact: {
     email: "rajarammagar101@gmail.com",
-    phone: "+91 86249 55714",
+    // phone: "+91 86249 55714",
     location: "Pune, Maharashtra",
     github: "github.com/Rajarammagar15",
-    linkedin: "linkedin.com/in/rajaram-magar", // ← update with your exact LinkedIn slug
+    linkedin: "linkedin.com/in/rajaram-magar",
   },
 };
 

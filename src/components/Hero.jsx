@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="hero-stats">
           {DATA.stats.map((s) => (
             <div key={s.label}>
-              <div className="stat-num">{s.num}<span>+</span></div>
+              <div className="stat-num">{s.num}</div>
               <div className="stat-label">{s.label}</div>
             </div>
           ))}
