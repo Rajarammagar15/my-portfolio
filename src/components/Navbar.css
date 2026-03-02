@@ -10,6 +10,7 @@ nav {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   transition: all 0.3s;
+  gap: 1.5rem;
 }
 nav.scrolled { padding: 0.9rem 5%; }
 
@@ -19,14 +20,17 @@ nav.scrolled { padding: 0.9rem 5%; }
   color: var(--accent);
   letter-spacing: 0.05em;
   z-index: 101;
+  flex-shrink: 0;
 }
 .nav-logo span { color: var(--gold); }
 
-/* ── Desktop links ── */
+/* ── Desktop nav links ── */
 .nav-links {
   display: flex;
   gap: 2.5rem;
   list-style: none;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-links a {
@@ -50,7 +54,28 @@ nav.scrolled { padding: 0.9rem 5%; }
 .nav-links a:hover { color: var(--text-primary); }
 .nav-links a:hover::after { width: 100%; }
 
-/* ── Hamburger button ── */
+/* ── Resume button ── */
+.nav-resume {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  background: rgba(201, 168, 76, 0.06);
+  transition: all 0.25s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.nav-resume:hover {
+  background: rgba(201, 168, 76, 0.14);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ── Hamburger ── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -61,18 +86,15 @@ nav.scrolled { padding: 0.9rem 5%; }
   cursor: pointer;
   padding: 4px;
   z-index: 101;
+  flex-shrink: 0;
 }
-
 .hamburger span {
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 24px; height: 2px;
   background: var(--text-secondary);
   transition: all 0.3s ease;
   transform-origin: center;
 }
-
-/* Animate to X when open */
 .hamburger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
   background: var(--accent);
@@ -86,7 +108,7 @@ nav.scrolled { padding: 0.9rem 5%; }
   background: var(--accent);
 }
 
-/* ── Mobile dropdown menu ── */
+/* ── Mobile dropdown ── */
 .mobile-menu {
   display: none;
   position: fixed;
@@ -96,17 +118,12 @@ nav.scrolled { padding: 0.9rem 5%; }
   backdrop-filter: blur(20px);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0;
   padding-top: 80px;
   border-bottom: 1px solid var(--border);
   transform: translateY(-100%);
   transition: transform 0.35s ease;
 }
-
-.mobile-menu.open {
-  transform: translateY(0);
-}
+.mobile-menu.open { transform: translateY(0); }
 
 .mobile-link {
   font-family: var(--font-mono);
@@ -126,9 +143,18 @@ nav.scrolled { padding: 0.9rem 5%; }
   background: rgba(79, 156, 249, 0.04);
 }
 
-/* ── Responsive breakpoints ── */
+/* Resume link in mobile menu — gold colored */
+.mobile-resume {
+  color: var(--gold) !important;
+}
+.mobile-resume:hover {
+  background: rgba(201, 168, 76, 0.06) !important;
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .nav-resume { display: none; }   /* hidden on mobile — shown in dropdown instead */
   .hamburger { display: flex; }
   .mobile-menu { display: flex; }
 }

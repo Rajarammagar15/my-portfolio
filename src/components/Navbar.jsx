@@ -13,10 +13,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menu when clicking a link
   const handleLinkClick = () => setMenuOpen(false);
 
-  // Close menu on resize to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
     window.addEventListener("resize", onResize);
@@ -37,7 +35,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Hamburger button — mobile only */}
+        {/* Resume button — desktop */}
+        <a
+          href="/resume.pdf"
+          download="Rajaram_Magar_Resume.pdf"
+          className="nav-resume"
+        >
+          ↓ Resume
+        </a>
+
+        {/* Hamburger — mobile only */}
         <button
           className={`hamburger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -49,7 +56,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile dropdown */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {links.map((l) => (
           <a
@@ -61,6 +68,15 @@ export default function Navbar() {
             {l}
           </a>
         ))}
+        {/* Resume in mobile menu too */}
+        <a
+          href="/resume.pdf"
+          download="Rajaram_Magar_Resume.pdf"
+          className="mobile-link mobile-resume"
+          onClick={handleLinkClick}
+        >
+          ↓ Download Resume
+        </a>
       </div>
     </>
   );

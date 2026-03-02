@@ -47,6 +47,7 @@ const DATA = {
       frontendGithub: null,
       demo: null,
       academic: false,
+      personal: true,
     },
     {
       title: "Personal Finance Manager",
@@ -56,6 +57,7 @@ const DATA = {
       frontendGithub: "https://github.com/Rajarammagar15/personal-finance-manager-react.git",
       demo: null,
       academic: false,
+      personal: true,
     },
     // {
     //   title: "Continuous Face Authentication (Webcam)",
@@ -64,6 +66,7 @@ const DATA = {
     //   github: null,
     //   demo: null,
     //   academic: true,
+    //   personal: false,
     // },
     {
       title: "Face Recognition Model",
@@ -72,6 +75,7 @@ const DATA = {
       github: null,
       demo: null,
       academic: true,
+      personal: false,
     },
   ],
   experience: [

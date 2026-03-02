@@ -3,14 +3,9 @@ import DATA from "../data/resume";
 import { useFadeIn } from "../hooks/useFadeIn";
 import "./Projects.css";
 
-// Architecture diagram for AI Stock Prediction project
-// Rendered as a clean visual — no image needed
 function ArchitectureDiagram() {
   return (
     <div className="arch-diagram">
-      <div className="arch-title">System Architecture</div>
-
-      {/* Data Sources */}
       <div className="arch-section">
         <div className="arch-label">Data Ingestion Layer</div>
         <div className="arch-row">
@@ -25,7 +20,6 @@ function ArchitectureDiagram() {
         <span>▼</span><span>▼</span><span>▼</span><span>▼</span>
       </div>
 
-      {/* Processing */}
       <div className="arch-section">
         <div className="arch-label">Processing Layer</div>
         <div className="arch-row">
@@ -42,7 +36,6 @@ function ArchitectureDiagram() {
 
       <div className="arch-arrows center">▼</div>
 
-      {/* Feature Store */}
       <div className="arch-section center-section">
         <div className="arch-label">Feature Engineering</div>
         <div className="arch-box feature">
@@ -53,7 +46,6 @@ function ArchitectureDiagram() {
 
       <div className="arch-arrows center">▼</div>
 
-      {/* ML Model */}
       <div className="arch-section center-section">
         <div className="arch-label">ML Model</div>
         <div className="arch-box model">
@@ -64,7 +56,6 @@ function ArchitectureDiagram() {
 
       <div className="arch-arrows center">▼</div>
 
-      {/* LangChain Agent */}
       <div className="arch-section center-section">
         <div className="arch-label">Orchestration</div>
         <div className="arch-box agent">
@@ -75,7 +66,6 @@ function ArchitectureDiagram() {
 
       <div className="arch-arrows center">▼</div>
 
-      {/* Output */}
       <div className="arch-section center-section">
         <div className="arch-label">Output</div>
         <div className="arch-box output">
@@ -129,10 +119,18 @@ export default function Projects() {
               Project_{String(i + 1).padStart(2, "0")}
             </div>
 
-            {/* WIP badge for AI project */}
-            {p.title.includes("AI Stock") && (
-              <span className="project-wip">🚧 In Progress</span>
-            )}
+            {/* ── Badges row (WIP + Personal) — always on their own line ── */}
+            <div className="project-badges">
+              {p.title.includes("AI Stock") && (
+                <span className="project-wip">🚧 In Progress</span>
+              )}
+              {p.personal && (
+                <span className="project-personal">🧑‍💻 Personal Project</span>
+              )}
+              {p.academic && (
+                <span className="project-academic-badge">🎓 Academic Project</span>
+              )}
+            </div>
 
             <h3 className="project-title">{p.title}</h3>
             <p className="project-desc">{p.desc}</p>
@@ -143,14 +141,13 @@ export default function Projects() {
               ))}
             </div>
 
+            {/* ── Links row — always separate from badges ── */}
             <div className="project-links">
-              {/* Architecture button — only for AI Stock project */}
               {p.title.includes("AI Stock") && (
                 <button className="project-link arch-btn" onClick={() => setShowArch(true)}>
                   ⬡ View Architecture
                 </button>
               )}
-
               {p.github && (
                 <a href={p.github} target="_blank" rel="noreferrer" className="project-link">
                   ↗ Backend Repo
@@ -160,9 +157,6 @@ export default function Projects() {
                 <a href={p.frontendGithub} target="_blank" rel="noreferrer" className="project-link">
                   ↗ Frontend Repo
                 </a>
-              )}
-              {p.academic && (
-                <span className="project-academic">Academic Project</span>
               )}
             </div>
           </div>
