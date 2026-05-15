@@ -106,6 +106,14 @@ export default function Contact() {
                 </a>
               </span>
             </div>
+            <div className="contact-row">
+              <span className="contact-row-label">Portfolio</span>
+              <span className="contact-row-val">
+                <a href={`https://${DATA.contact.portfolio}`} target="_blank" rel="noreferrer">
+                  {DATA.contact.portfolio}
+                </a>
+              </span>
+            </div>
           </div>
         </div>
 

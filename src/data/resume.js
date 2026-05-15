@@ -1,11 +1,13 @@
 const DATA = {
   name: "Rajaram Magar",
   role: "Backend Engineer building high-scale financial systems & AI-driven solutions",
-  bio: "Software Engineer with ~3 years of experience building high-performance, secure, and scalable Java-based backend systems in the banking and financial domain. Specialized in Spring Boot microservices, event-driven architectures, real-time transaction processing, and payments-grade API design.",
+  bio: "Software Engineer with ~3 years of experience building high-performance, secure, and scalable Java-based backend systems in the banking and financial domain. Specialized in Spring Boot microservices, event-driven architectures, real-time financial transaction processing, and AI-integrated backend systems.",
   stats: [
     { num: "3", label: "Years Experience" },
     { num: "25+", label: "REST APIs Built" },
     { num: "9.56", label: "CGPA — B.Tech CS" },
+    { num: "10+", label: "Production Microservices Shipped" },
+    { num: "150+", label: "DSA Problems Solved" },
   ],
   certifications: [
     "AWS Certified Solutions Architect – Associate",
@@ -15,7 +17,7 @@ const DATA = {
     {
       icon: "☕",
       title: "Backend Engineering",
-      tags: ["Java 8/11/17", "Spring Boot", "Spring Security", "JPA/Hibernate", "REST API Design", "Feign Client"],
+      tags: ["Java 8/11/17", "Spring Boot", "Spring Security", "JPA/Hibernate", "REST API Design", "HttpClient", "LLM Integration"],
     },
     {
       icon: "🗄️",
@@ -30,7 +32,7 @@ const DATA = {
     {
       icon: "🔗",
       title: "Architecture & Messaging",
-      tags: ["System Design", "Concurrency", "Idempotency", "Microservices", "Event-Driven", "RabbitMQ"],
+      tags: ["System Design", "Concurrency", "Idempotency", "Microservices", "Event-Driven", "RabbitMQ", "Prompt Engineering", "API Gateway"],
     },
     {
       icon: "🧪",
@@ -41,8 +43,18 @@ const DATA = {
   projects: [
     {
       title: "AI Stock Movement Prediction Agent",
-      desc: "Building an AI-powered stock movement prediction system that aggregates financial news, YouTube expert sentiment, Twitter/Reddit discussions, and technical indicators (RSI, SMA) to forecast stock price movements across multiple timeframes (T+1, T+5, T+30 days). \n The system uses LLM-based sentiment extraction pipelines and trains XGBoost models on engineered features to avoid look-ahead bias and improve predictive accuracy. Designed as a modular agent-based architecture using LangChain for intelligent decision orchestration.",
+      desc: "Building an AI-powered stock movement prediction system that aggregates financial news, YouTube/Twitter/Reddit sentiment, and technical indicators (RSI, SMA) to forecast price movements across T+1, T+5, T+30 day timeframes. Uses LLM-based sentiment extraction pipelines and XGBoost models on engineered features. Modular agent-based architecture using LangChain.",
       stack: ["Python", "LangChain", "XGBoost", "Pandas", "LLM APIs", "Feature Engineering", "ML Pipeline"],
+      github: null,
+      frontendGithub: null,
+      demo: null,
+      academic: false,
+      personal: true,
+    },
+    {
+      title: "BIAN Mapping AI Automation Tool",
+      desc: "AI-powered platform that maps core banking APIs to BIAN (Banking Industry Architecture Network) standard using GPT-4o. Built a two-leg LLM pipeline: Leg 1 uses GPT-4o Vision to parse API spec PDFs by rendering pages as images and extracting structured field metadata; Leg 2 sends the confirmed metadata with a curated BIAN corpus to GPT-4o for semantic field-level mapping with confidence scoring.\n\nFeatures a conversational React chatbot UI with multi-source input (Swagger URL, Swagger file, PDF upload), human-in-the-loop PDF metadata review before BIAN mapping runs, and a result card showing service domain, alignment score (0–100), field mappings, and compliance gaps.",
+      stack: ["Java 17", "Spring Boot 3.2", "GPT-4o", "GPT-4o Vision", "React", "PDFBox", "swagger-parser", "WebClient"],
       github: null,
       frontendGithub: null,
       demo: null,
@@ -59,15 +71,6 @@ const DATA = {
       academic: false,
       personal: true,
     },
-    // {
-    //   title: "Continuous Face Authentication (Webcam)",
-    //   desc: "Real-time face authentication system leveraging a fine-tuned PyTorch model (nn4.small2.v1.t7) for continuous user verification via webcam. Achieved near-perfect accuracy under variable lighting and facial expression conditions. Built during B.Tech at Govt. College of Engineering, Chandrapur.",
-    //   stack: ["Python", "PyTorch", "Deep Learning", "OpenCV"],
-    //   github: null,
-    //   demo: null,
-    //   academic: true,
-    //   personal: false,
-    // },
     {
       title: "Face Recognition Model",
       desc: "Feed-forward neural network for high-accuracy facial recognition and authentication. Trained and tested across multiple benchmark datasets, achieving ~100% test accuracy with near-perfect precision, recall, and F1-score. A robust solution for security and biometric identification systems.",
@@ -106,6 +109,7 @@ const DATA = {
           bullets: [
             "Built an internal API Initializer tool to auto-generate controller, service, mapper, and model layers from structured Excel inputs.",
             "Reduced new service setup time by 60–70% and standardized backend development practices across teams.",
+            "Built an AI-powered BIAN Mapping Automation Tool using Java Spring Boot and GPT-4o, reducing manual API documentation time from 4–8 hours per API to under 60 seconds — adopted for architecture review and partner onboarding workflows."
           ],
         },
         {
@@ -127,7 +131,7 @@ const DATA = {
   },
   contact: {
     email: "rajarammagar101@gmail.com",
-    // phone: "+91 86249 55714",
+    portfolio: "rajarammagar.vercel.app",
     location: "Pune, Maharashtra",
     github: "github.com/Rajarammagar15",
     linkedin: "linkedin.com/in/rajaram-magar",
