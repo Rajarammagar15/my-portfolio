@@ -1,4 +1,4 @@
-import profilePhoto from "../assets/profile.jpg";
+import profilePhoto from "../assets/profile.jpeg";
 import DATA from "../data/resume";
 import "./Hero.css";
 
