@@ -16,7 +16,6 @@
     radial-gradient(ellipse 60% 50% at 80% 50%, rgba(79,156,249,0.06) 0%, transparent 70%),
     radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
 }
-
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;
   background-image:
@@ -27,12 +26,9 @@
   opacity: 0.4;
 }
 
-/* ── Left: text ── */
 .hero-content {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  max-width: 600px;
+  position: relative; z-index: 1;
+  flex: 1; max-width: 620px;
 }
 
 .hero-greeting {
@@ -42,14 +38,11 @@
   color: var(--accent);
   text-transform: uppercase;
   margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex; align-items: center; gap: 1rem;
 }
 .hero-greeting::before {
   content: '';
-  display: inline-block;
-  width: 40px; height: 1px;
+  display: inline-block; width: 40px; height: 1px;
   background: var(--accent);
 }
 
@@ -77,145 +70,88 @@
   margin-bottom: 2.5rem;
 }
 
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
+/* Certifications */
 .cert-badges {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
   margin-top: 2rem;
 }
-
 .cert-badge {
   font-family: var(--font-mono);
-  font-size: 0.67rem;
-  letter-spacing: 0.08em;
+  font-size: 0.67rem; letter-spacing: 0.08em;
   padding: 0.35rem 0.9rem;
   border: 1px solid rgba(201,168,76,0.3);
   color: var(--gold);
   background: rgba(201,168,76,0.06);
 }
 
+/* Awards */
+.award-badges {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.award-badge {
+  font-family: var(--font-mono);
+  font-size: 0.67rem; letter-spacing: 0.08em;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(167,139,250,0.3);
+  color: #a78bfa;
+  background: rgba(167,139,250,0.06);
+}
+
+/* Stats */
 .hero-stats {
-  display: flex;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
-  padding-top: 2rem;
+  display: flex; gap: 2.5rem;
+  margin-top: 2rem; padding-top: 2rem;
   border-top: 1px solid var(--border);
   flex-wrap: wrap;
 }
-
 .stat-num {
   font-family: var(--font-display);
-  font-size: 2.2rem;
-  color: var(--text-primary);
-  line-height: 1;
+  font-size: 2rem;
+  color: var(--text-primary); line-height: 1;
 }
 .stat-num span { color: var(--accent); }
-
 .stat-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem; letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 0.3rem;
+  color: var(--text-muted); margin-top: 0.3rem;
 }
 
-/* ── Right: photo ── */
-.hero-photo-wrapper {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
+/* Photo */
+.hero-photo-wrapper { position: relative; z-index: 1; flex-shrink: 0; }
 .hero-photo {
-  width: 300px;
-  height: 360px;
-  object-fit: cover;
-  object-position: top center;
+  width: 300px; height: 360px;
+  object-fit: cover; object-position: top center;
   display: block;
   border: 1px solid var(--border);
   filter: grayscale(10%);
   transition: filter 0.3s;
 }
 .hero-photo:hover { filter: grayscale(0%); }
-
 .hero-photo-wrapper::before {
   content: '';
-  position: absolute;
-  top: 14px; left: 14px;
+  position: absolute; top: 14px; left: 14px;
   width: 100%; height: 100%;
-  border: 1px solid var(--accent);
-  z-index: -1;
+  border: 1px solid var(--accent); z-index: -1;
 }
 
-/* ── Mobile: stack vertically, show photo on top ── */
+/* Mobile */
 @media (max-width: 900px) {
   #about {
-    flex-direction: column-reverse;  /* photo on top, text below */
-    justify-content: center;
-    align-items: center;
-    padding: 100px 6% 4rem;
-    gap: 2.5rem;
+    flex-direction: column-reverse;
+    justify-content: center; align-items: center;
+    padding: 100px 6% 4rem; gap: 2.5rem;
     text-align: center;
   }
-
-  .hero-content {
-    max-width: 100%;
-  }
-
-  .hero-greeting {
-    justify-content: center;
-  }
-
-  .hero-cta {
-    justify-content: center;
-  }
-
-  .cert-badges {
-    justify-content: center;
-  }
-
-  .hero-stats {
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  /* Smaller photo on mobile */
-  .hero-photo {
-    width: 200px;
-    height: 240px;
-  }
-
-  /* Adjust decorative border offset for smaller photo */
-  .hero-photo-wrapper::before {
-    top: 10px;
-    left: 10px;
-  }
+  .hero-content { max-width: 100%; }
+  .hero-greeting { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .cert-badges { justify-content: center; }
+  .award-badges { justify-content: center; }
+  .hero-stats { justify-content: center; gap: 2rem; }
+  .hero-photo { width: 200px; height: 240px; }
+  .hero-photo-wrapper::before { top: 10px; left: 10px; }
 }
-
-
-/* .btn-resume {
-  padding: 0.85rem 2.2rem;
-  background: transparent;
-  color: var(--gold);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 1px solid rgba(201,168,76,0.3);
-  text-decoration: none;
-  transition: all 0.25s;
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
-  display: inline-block;
-}
-.btn-resume:hover {
-  border-color: var(--gold);
-  background: rgba(201,168,76,0.06);
-  transform: translateY(-2px);
-} */

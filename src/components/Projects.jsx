@@ -3,7 +3,26 @@ import DATA from "../data/resume";
 import { useFadeIn } from "../hooks/useFadeIn";
 import "./Projects.css";
 
-function ArchitectureDiagram() {
+// ── Diagram content map ──────────────────────────────────────────
+// For wallet + AI stock we render coded diagrams.
+// For image-based diagrams (HLD, LLD PNGs) point to /docs/ in public folder.
+// Drop your PNG files into public/docs/:
+//   public/docs/HLD.png
+//   public/docs/wallet-service-lld.png
+//   public/docs/fraud-service-lld.png
+//   public/docs/audit-service-lld.png
+//   public/docs/notification-service-lld.png
+
+const DIAGRAM_IMAGES = {
+  hld:          "/docs/HLD.png",
+  wallet:       "/docs/wallet-service-lld.png",
+  fraud:        "/docs/fraud-service-lld.png",
+  audit:        "/docs/audit-service-lld.png",
+  notification: "/docs/notification-service-lld.png",
+};
+
+// AI Stock architecture — rendered as JSX (no image needed)
+function AIStockDiagram() {
   return (
     <div className="arch-diagram">
       <div className="arch-section">
@@ -15,90 +34,95 @@ function ArchitectureDiagram() {
           <div className="arch-box source">Historical Stock Data</div>
         </div>
       </div>
-
-      <div className="arch-arrows">
-        <span>▼</span><span>▼</span><span>▼</span><span>▼</span>
-      </div>
-
+      <div className="arch-arrows"><span>▼</span><span>▼</span><span>▼</span><span>▼</span></div>
       <div className="arch-section">
         <div className="arch-label">Processing Layer</div>
         <div className="arch-row">
-          <div className="arch-box process wide">
-            LLM Sentiment Analyzer<br />
-            <span className="arch-sub">Extracts bullish / bearish signals from text</span>
-          </div>
-          <div className="arch-box process wide">
-            Technical Indicators<br />
-            <span className="arch-sub">RSI · SMA · Volume · Price momentum</span>
-          </div>
+          <div className="arch-box process wide">LLM Sentiment Analyzer<br /><span className="arch-sub">Extracts bullish / bearish signals from text</span></div>
+          <div className="arch-box process wide">Technical Indicators<br /><span className="arch-sub">RSI · SMA · Volume · Price momentum</span></div>
         </div>
       </div>
-
       <div className="arch-arrows center">▼</div>
-
       <div className="arch-section center-section">
         <div className="arch-label">Feature Engineering</div>
-        <div className="arch-box feature">
-          Feature Store<br />
-          <span className="arch-sub">Merged sentiment + technical features · No look-ahead bias</span>
-        </div>
+        <div className="arch-box feature">Feature Store<br /><span className="arch-sub">Merged sentiment + technical features · No look-ahead bias</span></div>
       </div>
-
       <div className="arch-arrows center">▼</div>
-
       <div className="arch-section center-section">
         <div className="arch-label">ML Model</div>
-        <div className="arch-box model">
-          XGBoost Prediction Model<br />
-          <span className="arch-sub">T+1 · T+5 · T+30 day forecasts</span>
-        </div>
+        <div className="arch-box model">XGBoost Prediction Model<br /><span className="arch-sub">T+1 · T+5 · T+30 day forecasts</span></div>
       </div>
-
       <div className="arch-arrows center">▼</div>
-
       <div className="arch-section center-section">
         <div className="arch-label">Orchestration</div>
-        <div className="arch-box agent">
-          LangChain Agent<br />
-          <span className="arch-sub">Intelligent decision orchestration · Tool routing</span>
-        </div>
+        <div className="arch-box agent">LangChain Agent<br /><span className="arch-sub">Intelligent decision orchestration · Tool routing</span></div>
       </div>
-
       <div className="arch-arrows center">▼</div>
-
       <div className="arch-section center-section">
         <div className="arch-label">Output</div>
-        <div className="arch-box output">
-          Final Trading Insight<br />
-          <span className="arch-sub">BUY · SELL · HOLD signal with confidence score</span>
-        </div>
+        <div className="arch-box output">Final Trading Insight<br /><span className="arch-sub">BUY · SELL · HOLD signal with confidence score</span></div>
       </div>
     </div>
   );
 }
 
-function ArchModal({ onClose }) {
+// ── Modal ─────────────────────────────────────────────────────────
+function DiagramModal({ project, onClose }) {
+  const [activeKey, setActiveKey] = useState(
+    project.diagrams ? project.diagrams[0].key : "aistock"
+  );
+
+  const isImageDiagram = activeKey !== "aistock";
+  const imageSrc = DIAGRAM_IMAGES[activeKey];
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
         <div className="modal-header">
           <div>
-            <p className="modal-label">AI Stock Movement Prediction Agent</p>
-            <h3 className="modal-title">System Architecture</h3>
+            <p className="modal-label">{project.title}</p>
+            <h3 className="modal-title">Architecture Diagrams</h3>
           </div>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
+
+        {/* Tab bar — only show if multiple diagrams */}
+        {project.diagrams && project.diagrams.length > 1 && (
+          <div className="modal-tabs">
+            {project.diagrams.map((d) => (
+              <button
+                key={d.key}
+                className={`modal-tab ${activeKey === d.key ? "active" : ""}`}
+                onClick={() => setActiveKey(d.key)}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Body */}
         <div className="modal-body">
-          <ArchitectureDiagram />
+          {activeKey === "aistock" ? (
+            <AIStockDiagram />
+          ) : (
+            <img
+              src={imageSrc}
+              alt={`${project.title} diagram`}
+              className="diagram-img"
+            />
+          )}
         </div>
       </div>
     </div>
   );
 }
 
+// ── Main Component ────────────────────────────────────────────────
 export default function Projects() {
   useFadeIn();
-  const [showArch, setShowArch] = useState(false);
+  const [modalProject, setModalProject] = useState(null);
 
   return (
     <section id="projects">
@@ -113,23 +137,18 @@ export default function Projects() {
           <div
             className="project-card fade-in"
             key={p.title}
-            style={{ transitionDelay: `${i * 0.12}s` }}
+            style={{ transitionDelay: `${i * 0.1}s` }}
           >
             <div className="project-num">
               Project_{String(i + 1).padStart(2, "0")}
             </div>
 
-            {/* ── Badges row (WIP + Personal) — always on their own line ── */}
+            {/* ── Badges ── */}
             <div className="project-badges">
-              {p.title.includes("AI Stock") && (
-                <span className="project-wip">🚧 In Progress</span>
-              )}
-              {p.personal && (
-                <span className="project-personal">🧑‍💻 Personal Project</span>
-              )}
-              {p.academic && (
-                <span className="project-academic-badge">🎓 Academic Project</span>
-              )}
+              {p.wip && <span className="badge badge-wip">🚧 In Progress</span>}
+              {p.internal && <span className="badge badge-internal">🏢 Internal Tool — TCS</span>}
+              {p.personal && <span className="badge badge-personal">🧑‍💻 Personal Project</span>}
+              {p.academic && <span className="badge badge-academic">🎓 Academic Project</span>}
             </div>
 
             <h3 className="project-title">{p.title}</h3>
@@ -141,16 +160,19 @@ export default function Projects() {
               ))}
             </div>
 
-            {/* ── Links row — always separate from badges ── */}
+            {/* ── Links ── */}
             <div className="project-links">
-              {p.title.includes("AI Stock") && (
-                <button className="project-link arch-btn" onClick={() => setShowArch(true)}>
+              {p.diagrams && (
+                <button
+                  className="project-link arch-btn"
+                  onClick={() => setModalProject(p)}
+                >
                   ⬡ View Architecture
                 </button>
               )}
               {p.github && (
                 <a href={p.github} target="_blank" rel="noreferrer" className="project-link">
-                  ↗ Backend Repo
+                  ↗ GitHub Repo
                 </a>
               )}
               {p.frontendGithub && (
@@ -158,12 +180,20 @@ export default function Projects() {
                   ↗ Frontend Repo
                 </a>
               )}
+              {p.internal && (
+                <span className="project-confidential">🔒 Proprietary — Not Open Source</span>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      {showArch && <ArchModal onClose={() => setShowArch(false)} />}
+      {modalProject && (
+        <DiagramModal
+          project={modalProject}
+          onClose={() => setModalProject(null)}
+        />
+      )}
     </section>
   );
 }

@@ -14,7 +14,6 @@ export default function Experience() {
       </div>
 
       <div className="exp-timeline">
-        {/* Work Experience */}
         {DATA.experience.map((ex, i) => (
           <div className="exp-item fade-in" key={i}>
             <div className="exp-meta">
@@ -22,6 +21,9 @@ export default function Experience() {
               <span className="exp-company">{ex.company}</span>
             </div>
             <div className="exp-role">{ex.role}</div>
+            {ex.client && (
+              <div className="exp-client">↳ {ex.client}</div>
+            )}
             {ex.sections.map((sec) => (
               <div key={sec.label}>
                 <div className="exp-section-label">— {sec.label}</div>
