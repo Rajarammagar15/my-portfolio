@@ -1,0 +1,168 @@
+/* ── Blog Section ── */
+#blog {
+    padding: 100px 10% 4rem;
+    min-height: 80vh;
+}
+
+/* ── Blog List (stacked vertically, one below another) ── */
+.blogs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    max-width: 100%;
+}
+
+/* ── Empty State ── */
+.blog-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+}
+
+.blog-empty p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.blog-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* ── Loading State ── */
+.blog-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.blog-loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 0.75rem;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Add Blog Button (Moved to BlogForm.css for consistency) ── */
+/* If you want it in a separate container, use: */
+.blog-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.blog-filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.blog-filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+}
+
+.blog-filter-btn:hover,
+.blog-filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(79, 156, 249, 0.08);
+}
+
+/* ── Section Labels & Dividers ── */
+.section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.section-divider {
+    height: 2px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 2rem;
+}
+
+/* ── Blog Wrapper (if form is separate) ── */
+.blog-form-wrapper {
+    margin-bottom: 3rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    #blog {
+        padding: 100px 6% 4rem;
+    }
+
+    .blogs-grid {
+        gap: 1.75rem;
+        max-width: 100%;
+    }
+
+    .section-label {
+        font-size: 0.7rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+
+    .blog-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
