@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { fetchBlogs, addBlog } from '../data/blogData';
-import './Blog.css';
-import BlogForm from './BlogForm';
 import BlogCard from './BlogCard';
+import BlogForm from './BlogForm';
+import { useFadeIn } from '../hooks/useFadeIn';
+import './Blog.css';
 
 export default function Blog() {
+    useFadeIn();
+
     const [blogs, setBlogs] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [expandedId, setExpandedId] = useState(null); // only one post open at a time
 
     useEffect(() => {
         loadBlogs();
@@ -21,43 +25,42 @@ export default function Blog() {
     };
 
     const handleAddBlog = async (blogData, securityKey) => {
-        try {
-            await addBlog(blogData, securityKey);
-            await loadBlogs(); // Refresh list
-            setShowForm(false);
-            alert('Blog added successfully!');
-        } catch (error) {
-            alert(`Error: ${error.message}`);
-        }
+        await addBlog(blogData, securityKey);
+        await loadBlogs();
     };
 
     return (
         <section id="blogs">
             <div className="fade-in">
                 <p className="section-label">Writing & Insights</p>
-                <h2 className="section-title">Blogs</h2>
+                <h2 className="section-title">Blog</h2>
                 <div className="section-divider" />
             </div>
 
-            <button
-                className="add-blog-btn"
-                onClick={() => setShowForm(!showForm)}
-            >
+            <button className="add-blog-btn fade-in" onClick={() => setShowForm((prev) => !prev)}>
                 {showForm ? '✕ Close' : '+ New Blog Post'}
             </button>
 
-            {showForm && (
-                <BlogForm onSubmit={handleAddBlog} />
-            )}
+            {showForm && <BlogForm onSubmit={handleAddBlog} onCancel={() => setShowForm(false)} />}
 
             {loading ? (
-                <p>Loading blogs...</p>
+                <div className="blog-loading">Loading blogs</div>
             ) : blogs.length === 0 ? (
-                <p>No blogs yet. Check back soon!</p>
+                <div className="blog-empty fade-in">
+                    <div className="blog-empty-icon">📝</div>
+                    <p>No blogs yet. Check back soon!</p>
+                </div>
             ) : (
                 <div className="blogs-grid">
                     {blogs.map((blog) => (
-                        <BlogCard key={blog.id} blog={blog} />
+                        <div key={blog.id}>
+                            <BlogCard
+                                blog={blog}
+                                isExpanded={expandedId === blog.id}
+                                onExpand={() => setExpandedId(blog.id)}
+                                onCollapse={() => setExpandedId(null)}
+                            />
+                        </div>
                     ))}
                 </div>
             )}

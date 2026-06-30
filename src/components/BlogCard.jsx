@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './BlogCard.css';
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, isExpanded, onExpand, onCollapse }) {
+    const cardRef = useRef(null);
+
+    // Collapse when clicking anywhere outside this card
+    useEffect(() => {
+        if (!isExpanded) return;
+
+        const handleClickOutside = (e) => {
+            if (cardRef.current && !cardRef.current.contains(e.target)) {
+                onCollapse();
+            }
+        };
+
+        // mousedown fires before click-driven state changes elsewhere,
+        // avoiding a flash where the new target's own click handler fires first
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isExpanded, onCollapse]);
+
     return (
-        <article className="blog-card">
-            {/* Diagram / Header Image */}
+        <article
+            className={`blog-card ${isExpanded ? 'blog-card-expanded' : ''}`}
+            ref={cardRef}
+        >
             {blog.image_url && (
                 <div className="blog-image-wrapper">
                     <img src={blog.image_url} alt={blog.title} className="blog-image" />
@@ -34,23 +54,31 @@ export default function BlogCard({ blog }) {
                 </div>
             )}
 
-            <details className="blog-content">
-                <summary>Read Full Article</summary>
+            {!isExpanded ? (
+                <button className="blog-toggle-btn" onClick={onExpand}>
+                    ▶ Read Full Article
+                </button>
+            ) : (
+                <div className="blog-content">
+                    {blog.image_url && (
+                        <img src={blog.image_url} alt={`${blog.title} diagram`} className="blog-content-image" />
+                    )}
 
-                {blog.image_url && (
-                    <img src={blog.image_url} alt={`${blog.title} diagram`} className="blog-content-image" />
-                )}
+                    <ReactMarkdown
+                        components={{
+                            a: ({ node, href, ...props }) => (
+                                <a href={href} target="_blank" rel="noreferrer" {...props} />
+                            ),
+                        }}
+                    >
+                        {blog.content}
+                    </ReactMarkdown>
 
-                <ReactMarkdown
-                    components={{
-                        a: ({ node, href, ...props }) => (
-                            <a href={href} target="_blank" rel="noreferrer" {...props} />
-                        ),
-                    }}
-                >
-                    {blog.content}
-                </ReactMarkdown>
-            </details>
+                    <div className="blog-collapse-hint">
+                        Click anywhere outside this post to collapse
+                    </div>
+                </div>
+            )}
         </article>
     );
 }

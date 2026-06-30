@@ -155,60 +155,67 @@
     border-color: var(--accent);
 }
 
-/* ── Expandable Content (Details/Summary) ── */
-.blog-content {
-    margin-top: auto;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--border);
-}
-
-.blog-content summary {
+/* ── Expand Toggle Button ── */
+.blog-toggle-btn {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
     cursor: pointer;
-    padding: 0.5rem;
-    margin: -0.5rem;
-    transition: all 0.2s;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    padding: 0.6rem 0;
+    margin-top: auto;
+    background: none;
+    border: none;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    text-align: left;
+    transition: color 0.2s;
 }
 
-.blog-content summary:hover {
+.blog-toggle-btn:hover {
     color: var(--gold);
 }
 
-.blog-content summary::before {
-    content: '▶';
-    display: inline-block;
-    transition: transform 0.3s;
-    font-size: 0.6rem;
-}
-
-.blog-content[open] summary::before {
-    transform: rotate(90deg);
-}
-
-/* ── Markdown Content ── */
-.blog-content[open] {
-    padding-top: 1.5rem;
+/* ── Expanded content wrapper ── */
+.blog-content {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
     animation: expandContent 0.3s ease;
 }
 
 @keyframes expandContent {
     from {
         opacity: 0;
-        max-height: 0;
+        transform: translateY(-8px);
     }
 
     to {
         opacity: 1;
-        max-height: 2000px;
+        transform: translateY(0);
     }
+}
+
+/* ── Hint shown at the bottom of an expanded post ── */
+.blog-collapse-hint {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--border);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+
+/* ── Expanded card gets a subtle highlighted border ── */
+.blog-card-expanded {
+    border-color: rgba(79, 156, 249, 0.35);
+}
+
+.blog-card-expanded::after {
+    transform: scaleX(1);
 }
 
 /* Markdown styling inside blog-content */
